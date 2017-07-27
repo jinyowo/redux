@@ -12,17 +12,17 @@ import './Counter.css';
  * @returns {XML}
  * @constructor
  */
-const Counter = ({number, color, onIncrement, onDecrement, onSetColor}) => {
+const Counter = ({index, number, color, onIncrement, onDecrement, onSetColor}) => {
     return (
         <div className="Counter"
-             onClick={onIncrement}
+             onClick={() => onIncrement(index)}
              onContextMenu={
                  (e) => {
                      e.preventDefault();    // 메뉴 열리는 이벤트 방지
-                     onDecrement();
+                     onDecrement(index);
                  }
              }
-             onDoubleClick={onSetColor}
+             onDoubleClick={() => onSetColor(index)}
              style={{backgroundColor: color}} >
             {number}
         </div>
@@ -30,6 +30,7 @@ const Counter = ({number, color, onIncrement, onDecrement, onSetColor}) => {
 };
 
 Counter.propTypes = {
+    index: PropTypes.number,
     number: PropTypes.number,
     color: PropTypes.string,
     onIncrement: PropTypes.func,
@@ -38,6 +39,7 @@ Counter.propTypes = {
 };
 
 Counter.defaultProps = {
+    index: 0,
     number: 0,
     color: 'black',
     onIncrement: () => console.warn('onIncrement not defined'),

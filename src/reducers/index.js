@@ -1,22 +1,68 @@
-import color from './color';
-import number from './number';
-import { combineReducers } from 'redux';
+import * as types from '../actions/index';
 
-/**
- * 서브 리듀서들을 하나로 합침
- *
- * {
- *      numberData: {
- *          number: 0
- *      },
- *      colorData: {
- *          color: 'black'
- *      }
- * }
- */
-const reducers = combineReducers({
-    numberData: number,
-    colorData: color
-});
+const initialState = {
+    counters: [
+        {
+            color: 'black',
+            number: 0
+        }
+    ]
+};
 
-export default reducers;
+function counter(state = initialState, action) {
+    const { counters } = state;     // const counters = state.counters;
+
+    switch(action.type) {
+        case types.CREATE:
+            return {
+                counters: [
+                    ...counters,
+                    {
+                        color: action.color,
+                        number: 0
+                    }
+                ]
+            };
+        case types.REMOVE:
+            return {
+                counters: counters.slice(0, counters.length - 1)
+            };
+        case types.INCREMENT:
+            return {
+                counters: [
+                    ...counters.slice(0, action.index),
+                    {
+                        ...counters[action.index],
+                        number: counters[action.index].number + 1
+                    },
+                    ...counters.slice(action.index + 1, counters.length)
+                ]
+            };
+        case types.DECREMENT:
+            return {
+                counters: [
+                    ...counters.slice(0, action.index),
+                    {
+                        ...counters[action.index],
+                        number: counters[action.index].number - 1
+                    },
+                    ...counters.slice(action.index + 1, counters.length)
+                ]
+            };
+        case types.SET_COLOR:
+            return {
+                counters: [
+                    ...counters.slice(0, action.index),
+                    {
+                        ...counters[action.index],
+                        color: action.color
+                    },
+                    ...counters.slice(action.index + 1, counters.length)
+                ]
+            };
+        default:
+            return state;
+    }
+};
+
+export default counter;

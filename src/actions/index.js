@@ -1,19 +1,35 @@
 /**
  * Action Constructor
  */
+export const CREATE = 'CREATE';
+export const REMOVE = 'REMOVE';
+
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
 export const SET_COLOR = 'SET_COLOR';
 
-export const increment = () => ({
-    type: INCREMENT
+
+export const create = (color) => ({
+    type: CREATE,
+    color
 });
 
-export const decrement = () => ({
-    type: DECREMENT
+export const remove = () => ({
+    type: REMOVE
 });
 
-export const setColor = (color) => ({
+export const increment = (index) => ({
+    type: INCREMENT,
+    index
+});
+
+export const decrement = (index) => ({
+    type: DECREMENT,
+    index
+});
+
+export const setColor = ({index, color}) => ({
     type: SET_COLOR,
+    index,
     color
 });
