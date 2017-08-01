@@ -38,7 +38,7 @@ function counter(state = initialState, action) {
         case types.SET_COLOR:
             return state.set('counters', counters.update(
                 action.index,
-                (counter) => counters.set('color', action.color)
+                (counter) => counter.set('color', action.color)
             ));
 
         default:
