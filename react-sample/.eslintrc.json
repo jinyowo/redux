@@ -1,0 +1,15 @@
+{
+    "rules": {
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [
+                    ".js"
+                ]
+            }
+        ],
+        "indent": ["error", 4],
+        "react/jsx-indent": ["error", 4]
+    },
+    "extends": "airbnb"
+}
